@@ -15,7 +15,6 @@ async function loadUsers(){
 
     if(users){
       allUsers.value = users;
-      console.log(users)
     }
 }
 
@@ -24,12 +23,7 @@ async function addUser(){
     loadUsers();
 }
 
-function edit(id: any){
-    console.log(id)
-}
-
 async function remove(id: any){
-    console.log(id)
     await supabaseAdmin.auth.admin.deleteUser(id)
     loadUsers();
 }
@@ -40,7 +34,6 @@ async function remove(id: any){
     <table>
         <tr>
             <th class="mr-2">Email</th>
-            <th class="mr-2">Edit</th>
             <th class="mr-2">
             </th>
         </tr>
@@ -48,7 +41,6 @@ async function remove(id: any){
             <td>
                 <input type="text" v-model="addUserEmail" class="custom_input">
             </td>
-            <td></td>
             <td>
                 <MainButton @click="addUser">
                     <i class="pi pi-plus" />
@@ -57,9 +49,6 @@ async function remove(id: any){
         </tr>
         <tr v-for="user in allUsers">
             <td>{{ user.email }}</td>
-            <td>
-                <MainButton @click="edit(user.id)"><i class="pi pi-pencil"></i></MainButton>
-            </td>
             <td>
                 <MainButton  @click="remove(user.id)"><i class="pi pi-trash"></i></MainButton>
             </td>

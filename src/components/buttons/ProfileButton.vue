@@ -1,9 +1,11 @@
 <script setup lang="ts">
 
 import {RouterLink} from 'vue-router';
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import { supabaseAdmin, supabase } from '@/supabase'
+const admins = import.meta.env.VITE_ADMINS
 
+const isAdmin = ref(false);
 const emit = defineEmits(['logoutPressed'])
 
 async function deleteAccount(){
@@ -17,6 +19,10 @@ const dropdownOpen = ref(false)
 function logoutPressed() {
   emit('logoutPressed')
 }
+
+onMounted(async () => {
+  isAdmin.value = admins.includes((await supabase.auth.getUser()).data.user?.email)
+})
 
 </script>
 <template>
@@ -38,7 +44,7 @@ function logoutPressed() {
               class="custom_dropdown absolute left-full -ml-20 mt-1 w-screen max-w-xs transform px-2 sm:px-0">
 
             <div class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-              <div class="custom_background relative grid gap-6 px-5 py-6 sm:gap-8 sm:p-8">
+              <div v-if="isAdmin" class="custom_background relative grid gap-6 px-5 py-6 sm:gap-8 sm:p-8">
                 <RouterLink to="/users" class="-m-3 flex items-start rounded-lg p-3">
                   <i class="pi pi-users pr-4 pl-1 h-6 w-6 flex-shrink-0 text-template-secondary"/>
 
@@ -47,23 +53,6 @@ function logoutPressed() {
                     <p class="mt-1 text-sm custom_text_alt">All users</p>
                   </div>
                 </RouterLink>
-
-                <RouterLink to="/scooters" class="-m-3 flex items-start rounded-lg p-3">
-                  <i class="pi pi-id-card pr-4 pl-1 h-6 w-6 flex-shrink-0 text-template-secondary"/>
-                  <div class="ml-4">
-                    <p class="text-base font-medium custom_text -mt-0.5">Scooters</p>
-                    <p class="mt-1 text-sm custom_text_alt">Manage scooters</p>
-                  </div>
-                </RouterLink>
-
-                <RouterLink to="/prices" class="-m-3 flex items-start rounded-lg p-3">
-                  <i class="pi pi-sitemap pr-4 pl-1 h-6 w-6 flex-shrink-0 text-template-secondary"/>
-                  <div class="ml-4">
-                    <p class="text-base font-medium custom_text -mt-0.5">Prices</p>
-                    <p class="mt-1 text-sm custom_text_alt">Manage prices</p>
-                  </div>
-                </RouterLink>
-
               </div>
               <div class="custom_background_alt px-5 py-2 sm:px-8 sm:py-4 flex justify-center" @click="logoutPressed">
                 <div>

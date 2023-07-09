@@ -27,9 +27,20 @@ const props = defineProps({
   calcMode: {
     type: Boolean,
     default: false
+  },
+  reset: {
+    type: Boolean,
+    default: false
   }
 })
-const emit = defineEmits(['routeCalculated'])
+
+watch(props, () => {
+  if(props.reset){
+    clearRoute()
+    emit('resetRoute')
+  }
+})
+const emit = defineEmits(['routeCalculated', 'showBookingModal', 'resetRoute'])
 
 const reloadTriggerVal = ref(props.reloadTrigger)
 const HQ_LOCATION: [number, number] = [53.4996084094697, 10.002430559393813];
@@ -45,7 +56,7 @@ const scooterIcon = L.icon({
     iconAnchor: [28,35],
   });
 
-
+let selectedScooter: Scooter | undefined;
 let scooters: { scooter: Scooter, marker: L.Marker | undefined }[] = [];
 let map: L.Map;
 let initialized: boolean;
@@ -60,8 +71,9 @@ async function loadScooters() {
         .on('click', () => {
           if(props.deleteToggle){
             deleteScooter(s.id)
-          }else if(props.calcMode){
-            calcRoute(Coordinates.fromScooter(s))
+          }else{
+            selectedScooter = s;
+            emit('showBookingModal')
           }
       }).addTo(map)
     }
@@ -116,19 +128,11 @@ async function getRoute(start: Coordinates, dest: Coordinates){
   })).data;
 }
 
-async function calcRoute(scooterCoordinates: Coordinates){
-  let destination: Coordinates = await new Promise<Coordinates>((res, rej) => {
-    console.log('click on map to select destination') // @delete
-    map.once('click', ($event) => {
-      console.log('clicked on map') // @delete
-      res(new Coordinates($event.latlng.lat, $event.latlng.lng))
-    });
-  });
-
+async function calcRoute(scooterCoordinates: Coordinates, destination: Coordinates){
+  clearRoute();
   let route = await getRoute(scooterCoordinates, destination)
   let distance = 0;
   let lineCoords: [number, number][] = [];
-  console.log(route) // @delete
 
   route.features.forEach(f => {
     distance += f.properties.summary.distance;
@@ -137,7 +141,6 @@ async function calcRoute(scooterCoordinates: Coordinates){
 
   currentDisplayedRoute = {
     line: L.polyline(lineCoords, {color: "black", weight: 3}).addTo(map),
-    // startMarker: L.marker(lineCoords[0]).addTo(map), @delete
     endMarker: L.marker(lineCoords[lineCoords.length - 1]).addTo(map)
   }
 
@@ -160,7 +163,13 @@ watch(props, () => {
 });
 
 onMounted(() => {
-  map = L.map("mapContainer").setView(HQ_LOCATION, DEFAULT_ZOOM);
+  map = L.map("mapContainer")
+    .setView(HQ_LOCATION, DEFAULT_ZOOM)
+    .on('click', ($event) => {
+      if(props.calcMode && selectedScooter){
+        calcRoute(Coordinates.fromScooter(selectedScooter), new Coordinates($event.latlng.lat, $event.latlng.lng))
+      }
+    });
   loadScooters();
   loadUserLocation();
   //use a mix of renderers

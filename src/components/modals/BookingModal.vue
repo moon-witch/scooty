@@ -32,7 +32,6 @@ const props = defineProps({
 });
 
 const handleStartRide = () => {
-  console.log('ride started')
   emit('rideStarted')
   emit('rideStartedAlt')
   closeModal()
@@ -65,11 +64,6 @@ const getFinalPrice = computed(() => {
 </script>
 
 <template>
-  <MainButton v-if="props.showStartButton"
-              class="absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-48 z-10 text-2xl"
-              @click.prevent="handleShowModal(); showAny = true;">
-    back to booking
-  </MainButton>
   <ModalTemplate :show="showBookingModal">
     <div class="grid grid-cols-2">
       <div class="real_container">
@@ -103,7 +97,7 @@ const getFinalPrice = computed(() => {
     <div class="flex flex-col items-center justify-center mt-8">
       <div class="flex justify-center">
         <MainButton type="submit" class="w-fit mx-2" @click.prevent="handleStartRide">Start the ride</MainButton>
-        <MainButton v-if="routeDistance === 0" class="w-fit mx-2" @click.prevent="handleCalculateMode" id="cancel"
+        <MainButton class="w-fit mx-2" @click.prevent="handleCalculateMode" id="cancel"
                     :reversed="true">Calculate
           price
         </MainButton>
