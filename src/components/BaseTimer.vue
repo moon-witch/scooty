@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, onMounted, Ref, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 
 const timePassed = ref(0)
 
