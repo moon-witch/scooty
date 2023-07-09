@@ -54,7 +54,7 @@ function closeModal() {
 const getImg = computed(() => {
   const images = ['Scooter_1.png', 'Scooter_2.png', 'Scooter_3.png']
   selectedImage.value = images[Math.floor(Math.random() * images.length)]
-  return 'ScooterImages/' + selectedImage.value
+  return selectedImage.value
 })
 
 const getFinalPrice = computed(() => {
