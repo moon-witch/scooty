@@ -51,7 +51,7 @@ const deletingScooters = ref(false);
 const showConfirmation = ref(false);
 const eventEmitter = new EventEmitter();
 const scooterIcon = L.icon({ 
-    iconUrl: "src/assets/scooter_pin.png", 
+    iconUrl: "public/scooter_pin.png",
     iconSize: [50,50],
     iconAnchor: [28,35],
   });
