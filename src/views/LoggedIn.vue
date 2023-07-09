@@ -20,6 +20,7 @@ const showBookingModal = ref(false)
 const routeCalcMode = ref(false);
 const routeDistance = ref(0)
 const resetRoute = ref(false)
+const mapMessage = ref('')
 
 const props = defineProps(['session'])
 const handleSignOut = async () => {
@@ -105,8 +106,14 @@ onMounted(async () => {
       @route-calculated="updateRouteDistance($event)"
       @reset-route="resetRoute=false"
     />
+    <div class="custom_color absolute bottom-28 left-1/2 transform -translate-x-1/2 -translate-y-1/4">
+      {{ routeCalcMode ? 'click anywhere on the map to create a route, starting from your selected scooter' : ''}}
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.custom_color {
+  color: $bg-alt;
+}
 </style>

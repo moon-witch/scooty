@@ -56,6 +56,10 @@ const scooterIcon = L.icon({
     iconAnchor: [28,35],
   });
 
+const routeDestinationIcon = L.icon({
+  iconUrl: "marker-icon.png"
+})
+
 let selectedScooter: Scooter | undefined;
 let scooters: { scooter: Scooter, marker: L.Marker | undefined }[] = [];
 let map: L.Map;
@@ -141,7 +145,7 @@ async function calcRoute(scooterCoordinates: Coordinates, destination: Coordinat
 
   currentDisplayedRoute = {
     line: L.polyline(lineCoords, {color: "black", weight: 3}).addTo(map),
-    endMarker: L.marker(lineCoords[lineCoords.length - 1]).addTo(map)
+    endMarker: L.marker(lineCoords[lineCoords.length - 1], {icon: routeDestinationIcon}).addTo(map)
   }
 
   emit('routeCalculated', distance)  

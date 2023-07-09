@@ -31,32 +31,37 @@ async function remove(id: any){
 </script>
 
 <template>
+  <div class="flex justify-center mt-20 mx-96 py-12 rounded-xl custom_container">
     <table>
-        <tr>
-            <th class="mr-2">Email</th>
-            <th class="mr-2">
-            </th>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" v-model="addUserEmail" class="custom_input">
-            </td>
-            <td>
-                <MainButton @click="addUser">
-                    <i class="pi pi-plus" />
-                </MainButton>
-            </td>
-        </tr>
-        <tr v-for="user in allUsers">
-            <td>{{ user.email }}</td>
-            <td>
-                <MainButton  @click="remove(user.id)"><i class="pi pi-trash"></i></MainButton>
-            </td>
-        </tr>
+      <tr>
+        <th class="mr-2">Email</th>
+        <th class="mr-2">
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" v-model="addUserEmail" class="custom_input">
+        </td>
+        <td>
+          <MainButton @click="addUser">
+            <i class="pi pi-plus" />
+          </MainButton>
+        </td>
+      </tr>
+      <tr v-for="user in allUsers">
+        <td>{{ user.email }}</td>
+        <td>
+          <MainButton  @click="remove(user.id)"><i class="pi pi-trash"></i></MainButton>
+        </td>
+      </tr>
     </table>
+  </div>
 </template>
 
 <style lang="scss" scoped>
+.custom_container {
+  background-color: $bg-alt;
+}
 table {
     color: white;
     .custom_input {
