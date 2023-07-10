@@ -57,7 +57,8 @@ const scooterIcon = L.icon({
   });
 
 const routeDestinationIcon = L.icon({
-  iconUrl: "marker-icon.png"
+  iconUrl: "marker-icon.png",
+  iconAnchor: [12.5, 41]
 })
 
 let selectedScooter: Scooter | undefined;
