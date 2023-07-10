@@ -1,8 +1,16 @@
 <script setup lang="ts">
-
-import {RouterLink} from 'vue-router';
 import {ref} from "vue";
 
+const props = defineProps({
+  isAddActive: {
+    type: Boolean,
+    default: false
+  },
+  isDeleteActive: {
+    type: Boolean,
+    default: false
+  }
+})
 const emit = defineEmits(['addPressed', 'reloadPressed', 'deletePressed'])
 
 const dropdownOpen = ref(false)
@@ -45,6 +53,7 @@ function deletePressed() {
                     <p class="text-base font-medium custom_text -mt-0.5">Add Scooters</p>
                     <p class="mt-1 text-sm custom_text_alt">Toggle add mode on / off</p>
                   </div>
+                  <i v-if="isAddActive" class="pi pi-check"/>
                 </a>
 
                 <a class="custom_button -m-3 flex items-start rounded-lg p-3" @click="reloadPressed">
@@ -61,6 +70,7 @@ function deletePressed() {
                     <p class="text-base font-medium custom_text -mt-0.5">Delete Scooters</p>
                     <p class="mt-1 text-sm custom_text_alt">Delete scooters on map</p>
                   </div>
+                  <i v-if="isDeleteActive" class="pi pi-check"/>
                 </a>
               </div>
             </div>

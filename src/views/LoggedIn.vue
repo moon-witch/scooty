@@ -85,7 +85,12 @@ onMounted(async () => {
 
 <template>
   <ProfileButton @logout-pressed="handleSignOut"/>
-  <SettingsButton v-if="isAdmin" @add-pressed="toggleAdd" @reload-pressed="triggerReload" @delete-pressed="toggleDelete"/>
+  <SettingsButton v-if="isAdmin"
+                  :is-add-active="addToggle"
+                  :is-delete-active="deleteToggle"
+                  @add-pressed="toggleAdd" 
+                  @reload-pressed="triggerReload" 
+                  @delete-pressed="toggleDelete"/>
   <BookingModal :route-distance="routeDistance"
                 :show-start-button="showStartButton"
                 :show-booking-modal="showBookingModal"
