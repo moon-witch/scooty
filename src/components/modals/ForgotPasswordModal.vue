@@ -48,7 +48,7 @@ async function resetPassword() {
       <h2 class="font-bold text-2xl text-center">Reset password</h2>
       <form class="flex flex-col justify-center">
           <label for="email">Email</label>
-          <input id="email" type="email" v-model="email" @keypress.enter="resetPassword" class="custom_input text-amber-400 rounded-lg p-2 mb-2">
+          <input id="email" type="email" v-model="email" @keypress.enter="resetPassword" class="custom_input rounded-lg p-2 mb-2">
           <div class="flex jusity-center mb-2">
               <MainButton class="w-full" type="button" @click="resetPassword">Reset</MainButton>
               <MainButton class="w-full ml-1" :reversed="true" type="button" @click="closeAllModal">Cancel</MainButton>

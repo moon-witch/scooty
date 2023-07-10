@@ -44,7 +44,7 @@ const emit = defineEmits(['routeCalculated', 'showBookingModal', 'resetRoute'])
 
 const reloadTriggerVal = ref(props.reloadTrigger)
 const HQ_LOCATION: [number, number] = [53.4996084094697, 10.002430559393813];
-const DEFAULT_ZOOM = 15;
+const DEFAULT_ZOOM = 17;
 const confirmMessage = ref("");
 const addingScooters = ref(false);
 const deletingScooters = ref(false);
@@ -198,7 +198,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="flex justify-center pb-4 pt-4">
+  <div class="flex justify-center pb-4 pt-12 mt-12">
     <div class="rounded-2xl" id="mapContainer"></div>
   </div>
   <div class="flex justify-center py-12">
@@ -214,8 +214,8 @@ onBeforeUnmount(() => {
 
 <style scoped lang="scss">
 #mapContainer {
-  width: 35rem;
-  height: 35rem;
+  width: 80%;
+  height: 70vh;
   box-shadow: 0 0 6px 3px $bg-alt;
 }
 

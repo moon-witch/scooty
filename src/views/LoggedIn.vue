@@ -50,10 +50,13 @@ function triggerReload() {
   reloadTriggerVal.value += 1;
 }
 
+function triggerRouteReset() {
+  resetRoute.value= true;
+}
+
 function toggleEndButton() {
   showEndButton.value = !showEndButton.value
   showStartButton.value = !showStartButton.value
-  resetRoute.value = true;
 }
 
 function toggleRide() {
@@ -91,10 +94,9 @@ onMounted(async () => {
                 @ride-started-alt="toggleRide"
                 @show-booking-modal="toggleBookingModal"
                 />
-  <Receipt :show-end-button="showEndButton"
-           :show-timer="activeRide"
+  <Receipt :show-timer="activeRide"
            @ride-ended="toggleRide"
-           @receipt-closed="toggleEndButton"/>
+           @receipt-closed="toggleEndButton, triggerRouteReset"/>
   <div>
     <Map 
       :add-toggle="addToggle" 

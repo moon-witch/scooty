@@ -19,10 +19,6 @@ const rentTime = ref()
 const emit = defineEmits(['receiptClosed', 'rideEnded'])
 
 const props = defineProps({
-  showEndButton: {
-    type: Boolean,
-    default: false
-  },
   showTimer: {
     type: Boolean,
     default: false
@@ -75,7 +71,7 @@ watch(props, () => {
 
 <template>
   <MainButton
-      v-if="props.showEndButton"
+      v-if="props.showTimer"
       class="this_index_plus absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-12 z-10 text-7xl"
       @click="handleEndRide">
     end ride
@@ -99,7 +95,7 @@ watch(props, () => {
       <MainButton class="w-full mx-2" @click.prevent="closeModal" id="cancel" :reversed="true">Close</MainButton>
     </div>
   </ModalTemplate>
-  <ModalBackdrop v-if="props.showEndButton" :showBackdrop="true"/>
+  <ModalBackdrop v-if="props.showTimer || showReceiptModal" :showBackdrop="true"/>
 </template>
 
 <style scoped lang="scss">

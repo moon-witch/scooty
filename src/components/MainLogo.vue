@@ -317,6 +317,9 @@ function animatePaths(): void {
 </template>
 
 <style scoped lang="scss">
+* {
+  user-select: none;
+}
 
 #main {
   div {
