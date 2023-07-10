@@ -64,6 +64,7 @@ const computedShowRegister = computed(() => {
     <form class="flex flex-col justify-center">
       <label for="email">Choose an email</label>
       <input id="email" type="email" v-model="email" class="custom_input rounded-lg p-2 mb-2">
+      <div class="text-xs mb-2">Important notice: You will receive an email to verify it's you.</div>
 
       <label for="email">Choose a password</label>
       <input id="password" type="password" @keypress.enter="handleSignUp" v-model="password" class="custom_input rounded-lg p-2 mb-2">
@@ -88,7 +89,7 @@ const computedShowRegister = computed(() => {
     <div class="flex justify-center">
       <div
           v-if="loading"
-          class="fixed z-30 inset-0 overflow-hidden bg-black bg-opacity-95 font-bold text-4xl text-orange-700 text-center top-1/4 bottom-1/4 py-52"
+          class="custom_input fixed inset-0 overflow-hidden bg-black bg-opacity-95 font-bold text-4xl text-orange-700 text-center top-1/4 bottom-1/4 py-52"
       >
         please wait, while we create your account
       </div>
@@ -97,6 +98,10 @@ const computedShowRegister = computed(() => {
 </template>
 
 <style lang="scss" scoped>
+.custom_input {
+  z-index: 2000;
+}
+
 #register {
   background: $primary;
 

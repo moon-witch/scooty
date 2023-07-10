@@ -101,8 +101,11 @@ onMounted(async () => {
                 />
   <Receipt :show-timer="activeRide"
            @ride-ended="toggleRide"
-           @receipt-closed="toggleEndButton, triggerRouteReset"/>
+           @receipt-closed="triggerRouteReset"/>
   <div>
+    <div class="custom_color flex justify-center mt-4">
+      {{ routeCalcMode ? 'click anywhere on the map to create a route, starting from your selected scooter' : 'click on any scooter to start booking'}}
+    </div>
     <Map 
       :add-toggle="addToggle" 
       :calc-mode="routeCalcMode" 
@@ -113,9 +116,6 @@ onMounted(async () => {
       @route-calculated="updateRouteDistance($event)"
       @reset-route="resetRoute=false"
     />
-    <div class="custom_color absolute bottom-28 left-1/2 transform -translate-x-1/2 -translate-y-1/4">
-      {{ routeCalcMode ? 'click anywhere on the map to create a route, starting from your selected scooter' : ''}}
-    </div>
   </div>
 </template>
 

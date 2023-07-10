@@ -199,10 +199,10 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="flex justify-center pb-4 pt-12 mt-12">
+  <div class="flex justify-center pb-4 pt-12 mt-4">
     <div class="rounded-2xl" id="mapContainer"></div>
   </div>
-  <div class="flex justify-center py-12">
+  <div class="flex justify-center">
     <ConfirmationModal
         :show="showConfirmation"
         :message="confirmMessage"
@@ -216,7 +216,7 @@ onBeforeUnmount(() => {
 <style scoped lang="scss">
 #mapContainer {
   width: 80%;
-  height: 70vh;
+  height: 60vh;
   box-shadow: 0 0 6px 3px $bg-alt;
 }
 

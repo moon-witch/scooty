@@ -45,7 +45,7 @@ function deletePressed() {
               v-if="dropdownOpen"
               class="custom_dropdown absolute left-full -ml-80 z-full mt-1 w-screen max-w-xs transform px-2 sm:px-0">
 
-            <div class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+            <div class="custom_shadow overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
               <div class="custom_background relative grid gap-6 px-5 py-6 sm:gap-8 sm:p-8">
                 <a class="custom_button -m-3 flex items-start rounded-lg p-3" @click="addPressed">
                   <i class="pi pi-id-card pr-4 pl-1 h-6 w-6 flex-shrink-0 text-template-secondary"/>
@@ -105,6 +105,10 @@ i {
 
 .custom_dropdown {
   z-index: 1500;
+}
+
+.custom_shadow {
+  box-shadow: 0 0 6px 2px $bg-alt;
 }
 
 .custom_background {

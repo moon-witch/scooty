@@ -113,9 +113,15 @@ function switchModal({
               leave-from-class="opacity-100" leave-to-class="opacity-0">
     <div class="flex justify-center">
       <div v-if="loading"
-           class="custom_input fixed z-30 inset-0 overflow-hidden bg-black bg-opacity-95 font-bold text-4xl text-center top-1/4 bottom-1/4 py-52">
+           class="custom_input fixed inset-0 overflow-hidden bg-black bg-opacity-95 font-bold text-4xl text-center top-1/4 bottom-1/4 py-52">
         logging you in
       </div>
     </div>
   </transition>
 </template>
+
+<style scoped lang="scss">
+.custom_input {
+  z-index: 2000;
+}
+</style>
